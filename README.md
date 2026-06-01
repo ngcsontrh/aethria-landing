@@ -15,8 +15,8 @@ Static Astro landing page for Aethria, with English and Vietnamese localized rou
 Create `.env` from `.env.example` and set:
 
 ```sh
-PUBLIC_SITE_URL=https://aethria.study
-PUBLIC_CHAT_URL=https://chat.aethria.study
+PUBLIC_SITE_URL=https://landing.example.com
+PUBLIC_CHAT_URL=https://chat.example.com
 ```
 
 `PUBLIC_SITE_URL` is required for canonical URLs, sitemap, robots, Open Graph, Twitter cards, and structured data.
