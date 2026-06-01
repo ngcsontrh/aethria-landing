@@ -1,0 +1,156 @@
+---
+const chatUrl = import.meta.env.PUBLIC_CHAT_URL;
+const {
+  lang = 'en',
+} = Astro.props;
+const isVi = lang === 'vi';
+const homeUrl = lang === 'vi' ? '/vi/' : '/en/';
+---
+
+<header class="sticky top-0 z-50 w-full h-18 border-b border-slate-200/80 dark:border-slate-800/50 bg-white/70 dark:bg-bg-dark-primary/70 backdrop-blur-md transition-colors duration-300">
+  <div class="max-w-6xl mx-auto h-full px-6 flex items-center justify-between">
+    <a href={homeUrl} class="flex items-center gap-3 no-underline group">
+      <img src="/logo-icon.png" alt="Aethria Logo" class="w-9 h-9 object-contain group-hover:scale-105 transition-transform" />
+      <span class="font-sans text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+        Aethria
+      </span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#features" class="font-sans text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-indigo-500 after:via-violet-500 after:to-sky-500 after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform">
+        {isVi ? 'Tính năng' : 'Features'}
+      </a>
+      <a href="#about" class="font-sans text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-indigo-500 after:via-violet-500 after:to-sky-500 after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform">
+        {isVi ? 'Giới thiệu' : 'About'}
+      </a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <div class="relative inline-block text-left" id="lang-dropdown-container">
+        <button 
+          id="lang-dropdown-trigger" 
+          class="p-2 flex items-center justify-center border border-slate-200 dark:border-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg cursor-pointer transition-all duration-200 focus:outline-none"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-label="Select Language"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-70">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+        </button>
+
+        <div 
+          id="lang-dropdown-menu" 
+          class="absolute right-0 mt-2.5 w-36 origin-top-right rounded-lg bg-white dark:bg-bg-dark-secondary border border-slate-200 dark:border-slate-800/80 shadow-lg dark:shadow-indigo-950/20 ring-1 ring-black/5 focus:outline-none transition-all duration-200 scale-95 opacity-0 pointer-events-none z-50"
+          role="menu"
+          aria-orientation="vertical"
+        >
+          <div class="py-1 px-1 flex flex-col gap-0.5" role="none">
+            <button 
+              class="w-full text-left px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md cursor-pointer flex items-center justify-between transition-colors duration-150" 
+              role="menuitem"
+              data-lang-option="en"
+            >
+              <span>English</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-en text-indigo-500 dark:text-indigo-400">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+
+            <button 
+              class="w-full text-left px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md cursor-pointer flex items-center justify-between transition-colors duration-150" 
+              role="menuitem"
+              data-lang-option="vi"
+            >
+              <span>Tiếng Việt</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-vi text-indigo-500 dark:text-indigo-400">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button id="theme-toggle" class="p-2 flex items-center justify-center border border-slate-200 dark:border-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg cursor-pointer transition-all duration-200" aria-label="Toggle Theme">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden dark:block">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="block dark:hidden">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+      </button>
+
+      <a href={chatUrl} class="px-4 py-2 flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 hover:brightness-105 active:scale-[0.98] text-xs font-semibold text-white shadow-sm hover:shadow-md hover:shadow-indigo-500/10 transition-all duration-300 group no-underline">
+        <span>{isVi ? 'Đăng nhập' : 'Login'}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-0.5 transition-transform">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const setupToggleListeners = () => {
+    document.getElementById('theme-toggle')?.addEventListener('click', () => {
+      (window as any).toggleTheme?.();
+    });
+
+    const container = document.getElementById('lang-dropdown-container');
+    const trigger = document.getElementById('lang-dropdown-trigger');
+    const menu = document.getElementById('lang-dropdown-menu');
+    const options = document.querySelectorAll('[data-lang-option]');
+
+    if (!container || !trigger || !menu) return;
+
+    const toggleMenu = (show?: boolean) => {
+      const isVisible = show !== undefined ? show : menu.classList.contains('opacity-100');
+      if (isVisible) {
+        menu.classList.remove('scale-100', 'opacity-100', 'pointer-events-auto');
+        menu.classList.add('scale-95', 'opacity-0', 'pointer-events-none');
+        trigger.setAttribute('aria-expanded', 'false');
+      } else {
+        menu.classList.remove('scale-95', 'opacity-0', 'pointer-events-none');
+        menu.classList.add('scale-100', 'opacity-100', 'pointer-events-auto');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    };
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    options.forEach(option => {
+      option.addEventListener('click', (e) => {
+        const lang = option.getAttribute('data-lang-option');
+        if (lang && (window as any).setLanguage) {
+          (window as any).setLanguage(lang);
+        }
+        toggleMenu(true);
+      });
+    });
+
+    // Close transient UI on outside clicks so keyboard and mouse users see the same state.
+    document.addEventListener('click', (e) => {
+      if (!container.contains(e.target as Node)) {
+        toggleMenu(true);
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        toggleMenu(true);
+      }
+    });
+  };
+
+  setupToggleListeners();
+
+  // Astro swaps page content during client navigation, so listeners must be rebound.
+  document.addEventListener('astro:page-load', setupToggleListeners);
+</script>

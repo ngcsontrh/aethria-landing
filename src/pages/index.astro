@@ -1,0 +1,35 @@
+---
+const siteUrl = import.meta.env.PUBLIC_SITE_URL.replace(/\/$/, '');
+const defaultUrl = `${siteUrl}/en/`;
+const viUrl = `${siteUrl}/vi/`;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="robots" content="noindex,follow" />
+		<title>Aethria</title>
+		<link rel="canonical" href={defaultUrl} />
+		<link rel="alternate" hreflang="en" href={defaultUrl} />
+		<link rel="alternate" hreflang="vi" href={viUrl} />
+		<link rel="alternate" hreflang="x-default" href={defaultUrl} />
+		<script is:inline>
+			(function() {
+				var savedLang = localStorage.getItem('aethria-lang');
+				var browserLang = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
+				var nextLang = savedLang === 'vi' || (!savedLang && browserLang.toLowerCase().startsWith('vi')) ? 'vi' : 'en';
+				window.location.replace('/' + nextLang + '/' + window.location.search + window.location.hash);
+			})();
+		</script>
+	</head>
+	<body>
+		<noscript>
+			<p>
+				<a href="/en/">Continue in English</a>
+				<a href="/vi/">Tiep tuc bang tieng Viet</a>
+			</p>
+		</noscript>
+	</body>
+</html>

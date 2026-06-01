@@ -1,0 +1,32 @@
+---
+import Navbar from './Navbar.astro';
+import Hero from './Hero.astro';
+import Features from './Features.astro';
+import Footer from './Footer.astro';
+
+const {
+	lang = 'en',
+} = Astro.props;
+---
+
+<!-- Shared decorative grid stays outside section content so each block can layer above it. -->
+<div class="fixed inset-0 pointer-events-none z-10 grid-bg"></div>
+
+<div class="relative z-20">
+	<Navbar lang={lang} />
+	<Hero lang={lang} />
+	<Features lang={lang} />
+	<Footer lang={lang} />
+</div>
+
+<style>
+	.grid-bg {
+		background-image:
+			linear-gradient(var(--grid-color) 1px, transparent 1px),
+			linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+		background-size: 40px 40px;
+		background-position: center top;
+		mask-image: radial-gradient(circle at center top, white 40%, transparent 85%);
+		-webkit-mask-image: radial-gradient(circle at center top, white 40%, transparent 85%);
+	}
+</style>

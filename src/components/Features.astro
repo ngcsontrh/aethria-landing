@@ -1,0 +1,120 @@
+---
+const {
+  lang = 'en',
+} = Astro.props;
+
+const isVi = lang === 'vi';
+---
+
+<section id="features" class="relative w-full py-20 px-6 bg-gradient-to-b from-white via-indigo-50/20 to-white dark:from-bg-dark-primary dark:via-bg-dark-secondary/30 dark:to-bg-dark-primary border-b border-slate-200 dark:border-slate-800/50 transition-colors duration-300 overflow-hidden">
+  <!-- Decorative glows are isolated behind the feature content. -->
+  <div class="absolute w-[500px] h-[500px] rounded-full bg-indigo-400/10 dark:bg-indigo-500/5 blur-[130px] -top-1/4 -left-1/4 pointer-events-none"></div>
+  <div class="absolute w-[500px] h-[500px] rounded-full bg-sky-400/10 dark:bg-sky-500/5 blur-[130px] -bottom-1/4 -right-1/4 pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="text-center max-w-xl mx-auto mb-16">
+      <h2 class="font-sans text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4">
+        {isVi ? 'Thiết Kế Để Học Tập' : 'Designed for'} <span class="bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 bg-clip-text text-transparent">{isVi ? 'Hiệu Quả Hơn' : 'Efficient Learning'}</span>
+      </h2>
+      <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+        {isVi ? 'Aethria kết hợp giữa điều phối AI hiện đại và kiến trúc tinh gọn để tạo nên trợ thủ học tập tối ưu.' : 'Aethria combines modern AI orchestration with clean architectures to build the ultimate study companion.'}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      <div class="p-8 rounded-2xl bg-white dark:bg-bg-dark-secondary border border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/5 transition-all duration-300 relative overflow-hidden group">
+        <div class="flex items-center justify-center w-11 h-11 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 mb-6 group-hover:bg-gradient-to-r group-hover:from-indigo-500 group-hover:via-violet-500 group-hover:to-sky-500 group-hover:text-white group-hover:border-transparent group-hover:shadow-md transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+        </div>
+        <h3 class="font-sans text-base font-bold text-slate-900 dark:text-white mb-3">
+          {isVi ? 'Học Tập Cùng Cố Vấn AI' : 'AI Mentor Chat'}
+        </h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          {isVi ? 'Trò chuyện với các trợ lý học tập ảo bám sát tài liệu đã tải lên, giải nghĩa các khái niệm kèm sơ đồ trực quan sinh động.' : 'Chat with virtual study agents that reference your uploaded materials, explaining concepts with custom diagrams and formatting.'}
+        </p>
+      </div>
+
+      <div class="p-8 rounded-2xl bg-white dark:bg-bg-dark-secondary border border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/5 transition-all duration-300 relative overflow-hidden group">
+        <div class="flex items-center justify-center w-11 h-11 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 mb-6 group-hover:bg-gradient-to-r group-hover:from-indigo-500 group-hover:via-violet-500 group-hover:to-sky-500 group-hover:text-white group-hover:border-transparent group-hover:shadow-md transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <h3 class="font-sans text-base font-bold text-slate-900 dark:text-white mb-3">
+          {isVi ? 'Quản Lý Tài Liệu Thông Minh' : 'Knowledge Hub'}
+        </h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          {isVi ? 'Tải lên các giáo trình, bài giảng. Hệ thống tự động phân tích phân đoạn, lưu trữ đám mây và lập chỉ mục tìm kiếm vector bằng Qdrant.' : 'Upload learning slides, notes, or textbooks. Content is chunked, stored in cloud storage, and indexed using Qdrant vector search.'}
+        </p>
+      </div>
+
+      <div class="p-8 rounded-2xl bg-white dark:bg-bg-dark-secondary border border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/5 transition-all duration-300 relative overflow-hidden group">
+        <div class="flex items-center justify-center w-11 h-11 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 mb-6 group-hover:bg-gradient-to-r group-hover:from-indigo-500 group-hover:via-violet-500 group-hover:to-sky-500 group-hover:text-white group-hover:border-transparent group-hover:shadow-md transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="18" r="3"></circle>
+            <circle cx="6" cy="6" r="3"></circle>
+            <circle cx="6" cy="18" r="3"></circle>
+            <path d="M18 15V9a4 4 0 0 0-4-4H9"></path>
+            <line x1="6" y1="9" x2="6" y2="15"></line>
+          </svg>
+        </div>
+        <h3 class="font-sans text-base font-bold text-slate-900 dark:text-white mb-3">
+          {isVi ? 'Lộ Trình Học Cá Nhân Hóa' : 'Personalized Roadmaps'}
+        </h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          {isVi ? 'Khởi tạo các bước phân chia chương trình tự động theo mục tiêu cụ thể, hiển thị trực tuyến tiến độ và nội dung bài học tương ứng.' : 'Generate step-by-step learning schedules for complex topics with live streaming updates and progress tracking indicators.'}
+        </p>
+      </div>
+
+      <div class="p-8 rounded-2xl bg-white dark:bg-bg-dark-secondary border border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/5 transition-all duration-300 relative overflow-hidden group">
+        <div class="flex items-center justify-center w-11 h-11 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 mb-6 group-hover:bg-gradient-to-r group-hover:from-indigo-500 group-hover:via-violet-500 group-hover:to-sky-500 group-hover:text-white group-hover:border-transparent group-hover:shadow-md transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 11 12 14 22 4"></polyline>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          </svg>
+        </div>
+        <h3 class="font-sans text-base font-bold text-slate-900 dark:text-white mb-3">
+          {isVi ? 'Trắc Nghiệm Ôn Tập AI' : 'Custom Quizzes'}
+        </h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          {isVi ? 'Tạo các đề kiểm tra trắc nghiệm nhanh để đánh giá năng lực của bạn. Xem lịch sử làm bài và các lời giải thích chi tiết cho từng câu hỏi.' : 'Generate AI quizzes to evaluate your progress. Submit attempts, view detailed history, and analyze answers with smart explanations.'}
+        </p>
+      </div>
+
+      <div class="p-8 rounded-2xl bg-white dark:bg-bg-dark-secondary border border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/5 transition-all duration-300 relative overflow-hidden group">
+        <div class="flex items-center justify-center w-11 h-11 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 mb-6 group-hover:bg-gradient-to-r group-hover:from-indigo-500 group-hover:via-violet-500 group-hover:to-sky-500 group-hover:text-white group-hover:border-transparent group-hover:shadow-md transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
+        <h3 class="font-sans text-base font-bold text-slate-900 dark:text-white mb-3">
+          {isVi ? 'Giao Diện Thời Gian Thực' : 'Real-time Interface'}
+        </h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          {isVi ? 'Nhận phản hồi AI theo thời gian thực, đồng bộ thông báo và sự kiện tức thì mà không cần tải lại trang.' : 'Powered by SignalR to stream AI responses word-by-word. Updates and notification events sync instantly without refreshing.'}
+        </p>
+      </div>
+
+      <div class="p-8 rounded-2xl bg-white dark:bg-bg-dark-secondary border border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/5 transition-all duration-300 relative overflow-hidden group">
+        <div class="flex items-center justify-center w-11 h-11 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 mb-6 group-hover:bg-gradient-to-r group-hover:from-indigo-500 group-hover:via-violet-500 group-hover:to-sky-500 group-hover:text-white group-hover:border-transparent group-hover:shadow-md transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </div>
+        <h3 class="font-sans text-base font-bold text-slate-900 dark:text-white mb-3">
+          {isVi ? 'Tích Hợp Giao Thức MCP' : 'MCP Server Integration'}
+        </h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          {isVi ? 'Kết nối kho dữ liệu học tập với các ứng dụng AI bên ngoài (như Claude Desktop) thông qua máy chủ MCP được bảo vệ bằng mã khóa API riêng biệt.' : "Access your curated knowledge hub from external AI clients (like Claude Desktop) using Aethria's protected MCP server with API-key verification."}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

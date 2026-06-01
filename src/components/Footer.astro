@@ -1,0 +1,93 @@
+---
+import { Bookmark, BriefcaseBusiness, CircleAlert, ExternalLink, FolderGit, Mail } from '@lucide/astro';
+
+const chatUrl = import.meta.env.PUBLIC_CHAT_URL;
+const {
+  lang = 'en',
+} = Astro.props;
+
+const isVi = lang === 'vi';
+---
+
+<footer id="about" class="relative z-10 w-full py-16 px-6 bg-slate-100 dark:bg-bg-dark-secondary/60 border-t border-slate-200 dark:border-slate-800/50 transition-colors duration-300">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12 mb-16">
+      <div class="flex flex-col gap-4">
+        <a href="/" class="flex items-center gap-2 no-underline">
+          <img src="/logo-icon.png" alt="Aethria Logo" class="w-7 h-7 object-contain" />
+          <span class="font-sans text-base font-extrabold text-slate-900 dark:text-white tracking-tight">Aethria</span>
+        </a>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-sm">
+          {isVi ? 'Aethria là nền tảng hỗ trợ học tập bằng trí tuệ nhân tạo (AI), giúp học sinh, sinh viên và lập trình viên quản lý tài liệu, tạo lập kế hoạch học tập cá nhân hóa và trao đổi với chuyên gia ảo.' : 'Aethria is an AI-assisted learning platform that helps students and professionals manage study materials, generate personalized learning plans, and interact with virtual subject matter experts.'}
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <h4 class="font-sans text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
+          {isVi ? 'Nền tảng' : 'Platform'}
+        </h4>
+        <ul class="flex flex-col gap-3 list-none p-0 m-0">
+          <li>
+            <a href={chatUrl} class="text-xs text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 no-underline transition-colors flex items-center gap-1.5">
+              <ExternalLink size={12} class="opacity-70" />
+              <span>{isVi ? 'Mở ứng dụng' : 'Open App'}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <h4 class="font-sans text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
+          {isVi ? 'Mã nguồn mở' : 'Open Source'}
+        </h4>
+        <ul class="flex flex-col gap-3 list-none p-0 m-0">
+          <li>
+            <a href="https://github.com/ngcsontrh/aethria/blob/develop/LICENSE" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 no-underline transition-colors flex items-center gap-1.5">
+              <Bookmark size={12} class="opacity-70" />
+              <span>{isVi ? 'Giấy phép: Apache 2.0' : 'License: Apache 2.0'}</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/ngcsontrh/aethria" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 no-underline transition-colors flex items-center gap-1.5">
+              <FolderGit size={12} class="opacity-70" />
+              <span>{isVi ? 'Dự án GitHub' : 'GitHub Project'}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <h4 class="font-sans text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
+          {isVi ? 'Liên hệ' : 'Contact'}
+        </h4>
+        <ul class="flex flex-col gap-3 list-none p-0 m-0">
+          <li>
+            <a href="mailto:trhsonngoc12@gmail.com" class="text-xs text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 no-underline transition-colors flex items-center gap-1.5">
+              <Mail size={12} class="opacity-70" />
+              <span>trhsonngoc12@gmail.com</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/ngcsontrh" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 no-underline transition-colors flex items-center gap-1.5">
+              <BriefcaseBusiness size={12} class="opacity-70" />
+              <span>LinkedIn</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/ngcsontrh/aethria/issues" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 no-underline transition-colors flex items-center gap-1.5">
+              <CircleAlert size={12} class="opacity-70" />
+              <span>{isVi ? 'Báo lỗi / Góp ý' : 'Report issue'}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-200 dark:border-slate-800/80 pt-8 flex justify-center items-center">
+      <div class="text-xs text-slate-400 dark:text-slate-500 text-center">
+        &copy; {new Date().getFullYear()} Aethria.
+        <span>{isVi ? 'Mọi quyền được bảo lưu.' : 'All rights reserved.'}</span>
+      </div>
+    </div>
+  </div>
+</footer>

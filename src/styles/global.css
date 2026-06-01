@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #6366f1;
+  --color-brand-secondary: #0ea5e9;
+  --color-bg-dark-primary: #060913;
+  --color-bg-dark-secondary: #0b1120;
+  --font-sans: "Be Vietnam Pro", "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Be Vietnam Pro", system-ui, sans-serif;
+}
+
+:root {
+  --grid-color: rgba(99, 102, 241, 0.04);
+}
+
+:where(.dark) {
+  --grid-color: rgba(255, 255, 255, 0.025);
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+html {
+  font-size: 17px;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 17.5px;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Bilingual copy is rendered once and switched by the html[data-lang] attribute. */
+html[data-lang="en"] .lang-vi {
+  display: none !important;
+}
+html[data-lang="vi"] .lang-en {
+  display: none !important;
+}
+
+@utility glass-panel {
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+:where(.dark) .glass-panel {
+  background-color: rgba(30, 41, 59, 0.4);
+  border-color: rgba(255, 255, 255, 0.06);
+}

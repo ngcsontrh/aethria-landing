@@ -1,0 +1,185 @@
+---
+import '../styles/global.css';
+
+const {
+	lang = 'en',
+} = Astro.props;
+
+const metadata = {
+	en: {
+		title: 'Aethria — AI-Assisted Learning Platform',
+		description: 'Aethria is an AI-assisted learning platform for managing learning resources, mentors, quizzes, roadmaps, notifications, and chat-based guidance.',
+		ogDescription: 'Manage study resources, generate AI roadmaps, take interactive quizzes, and chat with mentor agents in Aethria.',
+		keywords: 'Aethria, AI learning, AI tutor, study roadmap, interactive quiz, learning management, mentor agent',
+		locale: 'en_US',
+		alternateLocale: 'vi_VN',
+		canonicalPath: '/en/',
+	},
+	vi: {
+		title: 'Aethria — Nền tảng học tập hỗ trợ bởi AI',
+		description: 'Aethria là nền tảng hỗ trợ học tập bằng trí tuệ nhân tạo (AI), giúp quản lý tài liệu, tạo lộ trình học tập, làm bài trắc nghiệm và tương tác với các cố vấn ảo.',
+		ogDescription: 'Quản lý tài liệu học tập, tạo lộ trình AI, làm bài trắc nghiệm tương tác và trò chuyện với cố vấn ảo trong Aethria.',
+		keywords: 'Aethria, học tập AI, gia sư AI, lộ trình học tập, trắc nghiệm tương tác, quản lý học tập, cố vấn ảo',
+		locale: 'vi_VN',
+		alternateLocale: 'en_US',
+		canonicalPath: '/vi/',
+	},
+};
+
+const pageLang = lang === 'vi' ? 'vi' : 'en';
+const pageMeta = metadata[pageLang];
+const siteUrl = import.meta.env.PUBLIC_SITE_URL.replace(/\/$/, '');
+const canonicalUrl = `${siteUrl}${pageMeta.canonicalPath}`;
+const alternateEnUrl = `${siteUrl}/en/`;
+const alternateViUrl = `${siteUrl}/vi/`;
+const logoUrl = `${siteUrl}/logo-icon.png`;
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'Organization',
+			'@id': `${siteUrl}/#organization`,
+			name: 'Aethria',
+			url: siteUrl,
+			logo: logoUrl,
+			sameAs: [
+				'https://github.com/ngcsontrh/aethria',
+				'https://www.linkedin.com/in/ngcsontrh',
+			],
+		},
+		{
+			'@type': 'WebSite',
+			'@id': `${siteUrl}/#website`,
+			name: 'Aethria',
+			url: siteUrl,
+			inLanguage: ['en', 'vi'],
+			publisher: {
+				'@id': `${siteUrl}/#organization`,
+			},
+		},
+	],
+};
+---
+
+<!doctype html>
+<html lang={pageLang} data-lang={pageLang}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/png" href="/logo-icon.png" />
+		<meta name="generator" content={Astro.generator} />
+
+		<title>{pageMeta.title}</title>
+		<meta name="description" content={pageMeta.description} />
+		<meta name="keywords" content={pageMeta.keywords} />
+		<link rel="canonical" href={canonicalUrl} />
+		<link rel="alternate" hreflang="en" href={alternateEnUrl} />
+		<link rel="alternate" hreflang="vi" href={alternateViUrl} />
+		<link rel="alternate" hreflang="x-default" href={alternateEnUrl} />
+		<meta property="og:title" content={pageMeta.title} />
+		<meta property="og:description" content={pageMeta.ogDescription} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:locale" content={pageMeta.locale} />
+		<meta property="og:locale:alternate" content={pageMeta.alternateLocale} />
+		<meta property="og:image" content={logoUrl} />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Aethria" />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content={pageMeta.title} />
+		<meta name="twitter:description" content={pageMeta.ogDescription} />
+		<meta name="twitter:image" content={logoUrl} />
+		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+		<script is:inline>
+			// Apply persisted theme before first paint; language is owned by the current route.
+			(function() {
+				const savedTheme = localStorage.getItem('aethria-theme') || 'dark';
+				if (savedTheme === 'dark') {
+					document.documentElement.classList.add('dark');
+					document.documentElement.setAttribute('data-theme', 'dark');
+				} else {
+					document.documentElement.classList.remove('dark');
+					document.documentElement.setAttribute('data-theme', 'light');
+				}
+			})();
+		</script>
+	</head>
+	<body class="bg-white text-slate-900 dark:bg-bg-dark-primary dark:text-slate-100 font-sans antialiased transition-colors duration-300">
+		<slot />
+
+		<script is:inline>
+			// These helpers are intentionally global so static Astro components can share controls.
+			window.setLanguage = (newLang) => {
+				if (!['en', 'vi'].includes(newLang)) return;
+
+				document.documentElement.setAttribute('data-lang', newLang);
+				document.documentElement.setAttribute('lang', newLang);
+				localStorage.setItem('aethria-lang', newLang);
+
+				window.dispatchEvent(new CustomEvent('lang-changed', { detail: newLang }));
+
+				const currentPath = window.location.pathname;
+				const routeMatch = currentPath.match(/^\/(en|vi)\/?/);
+				const nextPath = routeMatch
+					? currentPath.replace(/^\/(en|vi)(?=\/|$)/, `/${newLang}`)
+					: `/${newLang}/`;
+
+				if (currentPath !== nextPath) {
+					window.location.assign(`${nextPath}${window.location.hash}`);
+				}
+			};
+
+			window.toggleLanguage = () => {
+				const currentLang = document.documentElement.getAttribute('data-lang') || 'en';
+				window.setLanguage(currentLang === 'en' ? 'vi' : 'en');
+			};
+
+			window.toggleTheme = () => {
+				const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+				const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+				
+				if (newTheme === 'dark') {
+					document.documentElement.classList.add('dark');
+					document.documentElement.setAttribute('data-theme', 'dark');
+				} else {
+					document.documentElement.classList.remove('dark');
+					document.documentElement.setAttribute('data-theme', 'light');
+				}
+				localStorage.setItem('aethria-theme', newTheme);
+				
+				window.dispatchEvent(new CustomEvent('theme-changed', { detail: newTheme }));
+			};
+		</script>
+	</body>
+</html>
+
+<style is:global>
+	/* Keep native scrolling while matching the landing page theme. */
+	::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	html.dark ::-webkit-scrollbar-track {
+		background: #090d16;
+	}
+	::-webkit-scrollbar-thumb {
+		background: rgba(15, 23, 42, 0.15);
+		border-radius: 4px;
+	}
+	html.dark ::-webkit-scrollbar-thumb {
+		background: rgba(255, 255, 255, 0.1);
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: rgba(15, 23, 42, 0.25);
+	}
+	html.dark ::-webkit-scrollbar-thumb:hover {
+		background: rgba(255, 255, 255, 0.2);
+	}
+</style>
